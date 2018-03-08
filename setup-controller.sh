@@ -4456,7 +4456,6 @@ subnet_id=`openstack network show -f shell flat-lan-1-net | grep "^subnets=" | c
 openstack port create --network ${network_id} --fixed-ip subnet=${subnet_id},ip-address=10.11.10.21 testport1
 openstack port create --network ${network_id} --fixed-ip subnet=${subnet_id},ip-address=10.11.10.22 testport2
 openstack port create --network ${network_id} --fixed-ip subnet=${subnet_id},ip-address=10.11.10.23 testport3
-openstack port create --network ${network_id} --fixed-ip subnet=${subnet_id},ip-address=10.11.10.24 testport4
 
 # See https://docs.openstack.org/project-install-guide/baremetal/draft/configure-glance-images.html
 wget -O /tmp/setup/OL7.vmdk https://clemson.box.com/s/j3b6b8zkk2z36207enlgpws5cmb2wnwz
@@ -4466,16 +4465,13 @@ project_id=`openstack project list -f value | grep admin | cut -d' ' -f 1`
 flavor_id=`openstack flavor list -f value | grep m1.small | cut -d' ' -f 1`
 image_id=`openstack image list -f value | grep OL7 | cut -d' ' -f 1`
 security_id=`openstack security group list -f value | grep $project_id | cut -d' ' -f 1`
-port_id_1=`openstack port list -f value | grep testport1 | cut -d' ' -f 1`
-port_id_2=`openstack port list -f value | grep testport2 | cut -d' ' -f 1`
-port_id_3=`openstack port list -f value | grep testport3 | cut -d' ' -f 1`
-port_id_4=`openstack port list -f value | grep testport4 | cut -d' ' -f 1`
+port_id=`openstack port list -f value | grep testport3 | cut -d' ' -f 1`
 
 # See https://docs.openstack.org/mitaka/install-guide-ubuntu/launch-instance-selfservice.html
-openstack server create --flavor m1.medium --security-group $security_id --image OL7 --nic port-id=$port_id_1 headnode
-openstack server create --flavor m1.medium --security-group $security_id --image OL7 --nic port-id=$port_id_2 headnode
-openstack server create --flavor m1.medium --security-group $security_id --image OL7 --nic port-id=$port_id_3 headnode
-openstack server create --flavor m1.medium --security-group $security_id --image OL7 --nic port-id=$port_id_4 headnode
+openstack server create --flavor m1.medium --security-group $security_id --image OL7 --nic port-id=$port_id headnode
+openstack server create --flavor m1.medium --security-group $security_id --image OL7 --nic port-id=$port_id headnode
+openstack server create --flavor m1.medium --security-group $security_id --image OL7 --nic port-id=$port_id headnode
+openstack server create --flavor m1.medium --security-group $security_id --image OL7 --nic port-id=$port_id headnode
 
 echo "***"
 echo "*** Done with OpenStack Setup!"
