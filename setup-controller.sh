@@ -4439,7 +4439,6 @@ openstack server create --flavor m1.medium --security-group $security_id --image
 
 
 
-
 echo "***"
 echo "*** Done with OpenStack Setup!"
 echo "***"
