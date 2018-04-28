@@ -4469,16 +4469,16 @@ security_id=`openstack security group list -f value | grep $project_id | cut -d'
 
 # See https://docs.openstack.org/mitaka/install-guide-ubuntu/launch-instance-selfservice.html
 port_id=`openstack port list -f value | grep testport1 | cut -d' ' -f 1`
-openstack server create --flavor m1.large --security-group $security_id --image OL7 --nic port-id=$port_id headnode
+openstack server create --flavor m1.medium --security-group $security_id --image OL7 --nic port-id=$port_id headnode
 
 port_id=`openstack port list -f value | grep testport2 | cut -d' ' -f 1`
-openstack server create --flavor m1.large --security-group $security_id --image OL7 --nic port-id=$port_id instance2
+openstack server create --flavor m1.medium --security-group $security_id --image OL7 --nic port-id=$port_id instance2
 
 port_id=`openstack port list -f value | grep testport3 | cut -d' ' -f 1`
-openstack server create --flavor m1.large --security-group $security_id --image OL7 --nic port-id=$port_id instance3
+openstack server create --flavor m1.medium --security-group $security_id --image OL7 --nic port-id=$port_id instance3
 
 port_id=`openstack port list -f value | grep testport4 | cut -d' ' -f 1`
-openstack server create --flavor m1.large --security-group $security_id --image OL7 --nic port-id=$port_id instance4
+openstack server create --flavor m1.medium --security-group $security_id --image OL7 --nic port-id=$port_id instance4
 
 
 echo "***"
